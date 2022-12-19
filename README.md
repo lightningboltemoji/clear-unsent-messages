@@ -4,7 +4,7 @@ A RuneLite plugin for clearing unsent messages from your chatbox.
 
 <img width="313" alt="Picture of a message with leading 1s" src="https://user-images.githubusercontent.com/51724788/208325355-3851a5fc-f6bf-47a0-a4b6-3aa14a7c8144.png">
 
-<img src="https://user-images.githubusercontent.com/51724788/208325383-d0f0b999-5318-4dc8-8332-b1f6760ae375.gif" alt="Video of the plugin clearing an unsent message from the chatbox"/>
+<img width="178" src="https://user-images.githubusercontent.com/51724788/208325383-d0f0b999-5318-4dc8-8332-b1f6760ae375.gif" alt="Video of the plugin clearing an unsent message from the chatbox"/>
 
 ## Configuration
 

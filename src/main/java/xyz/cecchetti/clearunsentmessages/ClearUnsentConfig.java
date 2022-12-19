@@ -16,9 +16,9 @@ public interface ClearUnsentConfig extends Config {
 	}
 
 	@ConfigItem(
-			keyName = "onlySpacesNumbers",
-			name = "Only spaces/numbers",
-			description = "If checked, only clears unsent messages made up of spaces and numbers. If unchecked, clears any unsent message."
+		keyName = "onlySpacesNumbers",
+		name = "Only spaces/numbers",
+		description = "If checked, only clears unsent messages made up of spaces and numbers. If unchecked, clears any unsent message."
 	)
 	default boolean onlySpacesNumbers() {
 		return false;

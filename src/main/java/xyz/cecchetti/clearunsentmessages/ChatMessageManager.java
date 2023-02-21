@@ -4,8 +4,11 @@ import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
 import net.runelite.api.VarClientStr;
 import net.runelite.api.widgets.Widget;
+import net.runelite.client.input.KeyManager;
 
 import javax.inject.Inject;
+import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.regex.Matcher;
@@ -14,20 +17,23 @@ import java.util.regex.Pattern;
 @Slf4j
 public class ChatMessageManager {
 
-    private static final Pattern PATTERN_ONLY_SPACES_AND_NUMBERS = Pattern.compile("^[ |\\d]+$");
+    private static final Pattern PATTERN_ONLY_SPACES_AND_NUMBERS = Pattern.compile("^[ |\\d]*$");
     private static final Pattern PATTERN_CHATBOX_TEXT_PREFIX = Pattern.compile("(.*?): <col=(.*?)>");
     private static final String CHATBOX_TEXT_EMPTY_MESSAGE_FORMAT = "%s: <col=%s></col><col=%<s>*</col>";
+    private static final Component STUB_COMPONENT = new Component() {};
 
-    private Client client;
-    private ClearUnsentConfig config;
+    private final Client client;
+    private final ClearUnsentConfig config;
+    private final KeyManager keyManager;
 
     private Widget chatboxWidget = null;
     private Timer timer = null;
 
     @Inject
-    ChatMessageManager(Client client, ClearUnsentConfig config) {
+    ChatMessageManager(Client client, ClearUnsentConfig config, KeyManager keyManager) {
         this.client = client;
         this.config = config;
+        this.keyManager = keyManager;
     }
 
     public void onMessageChanged() {
@@ -56,6 +62,7 @@ public class ChatMessageManager {
             public void run() {
                 log.debug("(executed) Before: [" + typedText + "]");
                 clearMessage();
+                sendBackspace();
             }
         }, config.delay());
     }
@@ -83,6 +90,15 @@ public class ChatMessageManager {
         }
         chatboxWidget.setText(String.format(CHATBOX_TEXT_EMPTY_MESSAGE_FORMAT, matcher.group(1), matcher.group(2)));
         chatboxWidget.setXTextAlignment(0);
+    }
+
+    private void sendBackspace() {
+        // Fixes compatibility with the Key Remapping plugin, causing it to lock the chat after we clear it
+        KeyEvent fakeKeyEvent = new KeyEvent(STUB_COMPONENT, 1, System.currentTimeMillis(), 0, KeyEvent.VK_BACK_SPACE,
+                (char) KeyEvent.VK_BACK_SPACE);
+        keyManager.processKeyPressed(fakeKeyEvent);
+        keyManager.processKeyReleased(fakeKeyEvent);
+        keyManager.processKeyTyped(fakeKeyEvent);
     }
 
 }

@@ -1,5 +1,8 @@
 # Clear Unsent Messages
 
+[![](https://img.shields.io/endpoint?url=https://api.runelite.net/pluginhub/shields/installs/plugin/clear-unsent-messages)](https://runelite.net/plugin-hub/show/clear-unsent-messages)
+[![](https://img.shields.io/endpoint?url=https://api.runelite.net/pluginhub/shields/rank/plugin/clear-unsent-messages)](https://runelite.net/plugin-hub/show/clear-unsent-messages)
+
 A RuneLite plugin for clearing unsent messages from your chatbox.
 
 <img width="313" alt="Picture of a message with leading 1s" src="https://user-images.githubusercontent.com/51724788/208325355-3851a5fc-f6bf-47a0-a4b6-3aa14a7c8144.png">

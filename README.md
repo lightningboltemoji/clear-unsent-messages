@@ -21,3 +21,4 @@ A RuneLite plugin for clearing unsent messages from your chatbox.
 * 2023-09-06: Performance optimizations (do less on client thread).
 * 2023-02-20: Fix compatibility with the Key Remapping plugin.
 * 2023-02-09: Fix resizable mode. Fix text alignment when clearing long messages.
+* 2024-10-08: Fix compatibility with latest RuneLite version.

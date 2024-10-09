@@ -3,10 +3,9 @@ package xyz.cecchetti.clearunsentmessages;
 import net.runelite.api.Client;
 import net.runelite.api.VarClientStr;
 import net.runelite.api.widgets.Widget;
+import net.runelite.client.callback.ClientThread;
 import net.runelite.client.input.KeyManager;
 import org.junit.Test;
-
-import java.util.concurrent.Executors;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -28,8 +27,8 @@ public class Benchmark {
         final ClearUnsentConfig clearUnsentConfig = mock(ClearUnsentConfig.class);
         final KeyManager keyManager = mock(KeyManager.class);
 
-        final ChatMessageManager underTest = new ChatMessageManager(client, clearUnsentConfig, keyManager,
-                Executors.newSingleThreadScheduledExecutor());
+        final ChatMessageManager underTest = new ChatMessageManager(client, mock(ClientThread.class), clearUnsentConfig,
+                keyManager);
 
         // Warm up
         for (int i = 0; i < 100000; i++) {

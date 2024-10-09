@@ -4,12 +4,14 @@ import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
 import net.runelite.api.VarClientStr;
 import net.runelite.api.widgets.Widget;
+import net.runelite.client.callback.ClientThread;
 import net.runelite.client.input.KeyManager;
 
 import javax.inject.Inject;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.Optional;
+import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
@@ -28,6 +30,7 @@ public class ChatMessageManager {
     private final AtomicReference<Widget> chatboxWidgetHolder = new AtomicReference<>();
 
     private final Client client;
+    private final ClientThread clientThread;
     private final ClearUnsentConfig config;
     private final KeyManager keyManager;
     private final ScheduledExecutorService executorService;
@@ -37,19 +40,24 @@ public class ChatMessageManager {
     @Inject
     ChatMessageManager(
             Client client,
+            ClientThread clientThread,
             ClearUnsentConfig config,
-            KeyManager keyManager,
-            ScheduledExecutorService executorService
+            KeyManager keyManager
     ) {
         this.client = client;
+        this.clientThread = clientThread;
         this.config = config;
         this.keyManager = keyManager;
-        this.executorService = executorService;
+        this.executorService = Executors.newSingleThreadScheduledExecutor();
     }
 
     public void onMessageChanged() {
         Optional.ofNullable(future).ifPresent(f -> f.cancel(true));
-        future = executorService.schedule(() -> {
+        future = executorService.schedule(this::maybeClearMessage, config.delay(), TimeUnit.MILLISECONDS);
+    }
+
+    private void maybeClearMessage() {
+        clientThread.invokeLater(() -> {
             final String typedText = client.getVarcStrValue(VarClientStr.CHATBOX_TYPED_TEXT);
             if (!shouldClearMessage(typedText)) {
                 log.debug("No update needed: [" + typedText + "]");
@@ -58,11 +66,7 @@ public class ChatMessageManager {
             log.debug("(executed) Clearing: [" + typedText + "]");
             clearMessage();
             sendBackspace();
-        }, config.delay(), TimeUnit.MILLISECONDS);
-    }
-
-    public void releaseChatboxWidget() {
-        chatboxWidgetHolder.set(null);
+        });
     }
 
     private boolean shouldClearMessage(String msg) {
@@ -97,6 +101,10 @@ public class ChatMessageManager {
         keyManager.processKeyPressed(fakeKeyEvent);
         keyManager.processKeyReleased(fakeKeyEvent);
         keyManager.processKeyTyped(fakeKeyEvent);
+    }
+
+    public void releaseChatboxWidget() {
+        chatboxWidgetHolder.set(null);
     }
 
 }

@@ -42,13 +42,14 @@ public class ChatMessageManager {
             Client client,
             ClientThread clientThread,
             ClearUnsentConfig config,
-            KeyManager keyManager
+            KeyManager keyManager,
+            ScheduledExecutorService executorService
     ) {
         this.client = client;
         this.clientThread = clientThread;
         this.config = config;
         this.keyManager = keyManager;
-        this.executorService = Executors.newSingleThreadScheduledExecutor();
+        this.executorService = executorService;
     }
 
     public void onMessageChanged() {

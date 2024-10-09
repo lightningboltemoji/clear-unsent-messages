@@ -7,6 +7,8 @@ import net.runelite.client.callback.ClientThread;
 import net.runelite.client.input.KeyManager;
 import org.junit.Test;
 
+import java.util.concurrent.Executors;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -28,7 +30,7 @@ public class Benchmark {
         final KeyManager keyManager = mock(KeyManager.class);
 
         final ChatMessageManager underTest = new ChatMessageManager(client, mock(ClientThread.class), clearUnsentConfig,
-                keyManager);
+                keyManager, Executors.newSingleThreadScheduledExecutor());
 
         // Warm up
         for (int i = 0; i < 100000; i++) {

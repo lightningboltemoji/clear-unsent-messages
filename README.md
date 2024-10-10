@@ -16,9 +16,10 @@ A RuneLite plugin for clearing unsent messages from your chatbox.
 |Delay|After this period, any unsent message will cleared|1500ms|
 |Only spaces/numbers|If checked, only clears messages made up of spaces and numbers. Useful if you want to pre-type messages (for example: "sit" while in a fight).|false|
 
-## Updates
+## Changelog
 
+* 2024-10-10: Add instant clear hotkey. Refactor to support ignoring non-character keys (e.g. arrows).
+* 2024-10-08: Fix compatibility with latest RuneLite version.
 * 2023-09-06: Performance optimizations (do less on client thread).
 * 2023-02-20: Fix compatibility with the Key Remapping plugin.
 * 2023-02-09: Fix resizable mode. Fix text alignment when clearing long messages.
-* 2024-10-08: Fix compatibility with latest RuneLite version.

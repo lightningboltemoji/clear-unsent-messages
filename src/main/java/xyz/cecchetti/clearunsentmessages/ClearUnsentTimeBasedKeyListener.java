@@ -49,7 +49,7 @@ public class ClearUnsentTimeBasedKeyListener implements KeyListener {
         if (!config.enableTimeBased() || KEY_CODE_IGNORED.contains(e.getKeyCode()) || e instanceof KeyEventFakeBackspace) {
             return;
         }
-        log.debug("Key pressed - checking back in {}ms if message should be cleared", config.delay());
+        log.debug("Key pressed - checking back in {}ms to see if message should be cleared", config.delay());
         Optional.ofNullable(future).ifPresent(f -> f.cancel(true));
         future = executorService.schedule(this::maybeClearMessage, config.delay(), TimeUnit.MILLISECONDS);
     }

@@ -8,6 +8,7 @@ import net.runelite.client.callback.ClientThread;
 import net.runelite.client.input.KeyListener;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 import java.awt.event.KeyEvent;
 import java.util.Optional;
 import java.util.Set;
@@ -18,6 +19,7 @@ import java.util.regex.Pattern;
 
 @Slf4j
 @RequiredArgsConstructor(onConstructor_ = @__(@Inject))
+@Singleton
 public class ClearUnsentTimeBasedKeyListener implements KeyListener {
 
     private static final Pattern PATTERN_ONLY_SPACES_AND_NUMBERS = Pattern.compile("^[ |\\d]*$");

@@ -4,7 +4,10 @@ import com.google.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.client.util.HotkeyListener;
 
+import javax.inject.Singleton;
+
 @Slf4j
+@Singleton
 public class ClearUnsentHotkeyListener extends HotkeyListener {
 
     private final ClearUnsentConfig config;

@@ -17,7 +17,7 @@ A RuneLite plugin for clearing unsent messages from your chatbox
 
 One method of clearing messages is based on **typing inactivity**, wherein we detect once a configurable duration has passed since the last key press. This can be set to only trigger only for messages made up of spaces and numbers (for example, " 11111" but not "sit").
 
-_Enabled by default with a delay of 2500ms (2.5 seconds) for all messages_
+_Enabled by default with a delay of 2000ms (2.0 seconds) for all messages_
 
 ### Hotkey (new!)
 

@@ -5,6 +5,7 @@ import net.runelite.client.config.ConfigGroup;
 import net.runelite.client.config.ConfigItem;
 import net.runelite.client.config.ConfigSection;
 import net.runelite.client.config.Keybind;
+import net.runelite.client.util.OSType;
 
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
@@ -45,7 +46,7 @@ public interface ClearUnsentConfig extends Config {
             position = 1
     )
     default int delay() {
-        return 2500;
+        return 2000;
     }
 
     @ConfigItem(
@@ -78,6 +79,8 @@ public interface ClearUnsentConfig extends Config {
             position = 1
     )
     default Keybind clearHotkey() {
-        return new Keybind(KeyEvent.VK_D, InputEvent.META_DOWN_MASK);
+        return OSType.getOSType() == OSType.MacOS
+                ? new Keybind(KeyEvent.VK_D, InputEvent.META_DOWN_MASK)
+                : new Keybind(KeyEvent.VK_D, InputEvent.CTRL_DOWN_MASK);
     }
 }

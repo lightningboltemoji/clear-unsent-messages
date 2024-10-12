@@ -1,5 +1,6 @@
 package xyz.cecchetti.clearunsentmessages;
 
+import com.google.common.collect.Sets;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
@@ -24,17 +25,17 @@ public class ClearUnsentTimeBasedKeyListener implements KeyListener {
 
     private static final Pattern PATTERN_ONLY_SPACES_AND_NUMBERS = Pattern.compile("^[ |\\d]*$");
 
-    // Pressing these keys won't cause the timer to reset
-    private static final Set<Integer> KEY_CODE_IGNORED = Set.of(
-            KeyEvent.VK_UP,
-            KeyEvent.VK_DOWN,
-            KeyEvent.VK_LEFT,
-            KeyEvent.VK_RIGHT,
-            KeyEvent.VK_CONTROL,
-            KeyEvent.VK_ALT,
-            KeyEvent.VK_META,
-            KeyEvent.VK_SHIFT
+    // Key codes that shouldn't reset the timer when pressed
+    private static final Set<Integer> KEY_CODE_IGNORED = Sets.newHashSet(
+            KeyEvent.VK_UP, KeyEvent.VK_DOWN, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT,
+            KeyEvent.VK_CONTROL,  KeyEvent.VK_ALT, KeyEvent.VK_META,  KeyEvent.VK_SHIFT
     );
+
+    static {
+        for (int kc = KeyEvent.VK_F1; kc <= KeyEvent.VK_F12; kc++) {
+            KEY_CODE_IGNORED.add(kc);
+        }
+    }
 
     private final Client client;
     private final ClientThread clientThread;

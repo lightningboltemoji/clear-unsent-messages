@@ -27,7 +27,7 @@ _Disabled by default_
 
 ## Changelog
 
-* 2024-10-10: Add instant clear hotkey. Refactor to support ignoring non-character keys (e.g. arrows).
+* 2024-10-10: Add instant clear hotkey. Refactor to ignore non-character keys (e.g. arrows).
 * 2024-10-08: Fix compatibility with latest RuneLite version.
 * 2023-09-06: Performance optimizations (do less on client thread).
 * 2023-02-20: Fix compatibility with the Key Remapping plugin.

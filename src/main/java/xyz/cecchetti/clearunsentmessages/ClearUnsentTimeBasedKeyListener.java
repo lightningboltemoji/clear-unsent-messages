@@ -28,7 +28,8 @@ public class ClearUnsentTimeBasedKeyListener implements KeyListener {
     // Key codes that shouldn't reset the timer when pressed
     private static final Set<Integer> KEY_CODE_IGNORED = Sets.newHashSet(
             KeyEvent.VK_UP, KeyEvent.VK_DOWN, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT,
-            KeyEvent.VK_CONTROL, KeyEvent.VK_ALT, KeyEvent.VK_META, KeyEvent.VK_SHIFT
+            KeyEvent.VK_CONTROL, KeyEvent.VK_ALT, KeyEvent.VK_META, KeyEvent.VK_SHIFT,
+            KeyEvent.VK_ESCAPE
     );
 
     static {
@@ -62,7 +63,7 @@ public class ClearUnsentTimeBasedKeyListener implements KeyListener {
                 log.debug("No update needed: [{}]", typedText);
                 return;
             }
-            log.debug("(executed) Clearing: [{}]", typedText);
+            log.debug("Clearing: [{}]", typedText);
             chatMessageManager.clearMessage();
         });
     }

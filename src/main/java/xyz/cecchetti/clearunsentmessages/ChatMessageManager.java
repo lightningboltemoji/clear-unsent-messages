@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
 import net.runelite.api.VarClientStr;
+import net.runelite.api.widgets.ComponentID;
 import net.runelite.api.widgets.Widget;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.input.KeyManager;
@@ -35,7 +36,8 @@ public class ChatMessageManager {
             client.setVarcStrValue(VarClientStr.CHATBOX_TYPED_TEXT, "");
 
             // This changes what value you _see_ down in the chatbox
-            Widget chatboxWidget = chatboxWidgetHolder.updateAndGet(w -> w != null ? w : client.getWidget(162, 55));
+            Widget chatboxWidget = chatboxWidgetHolder.updateAndGet(w -> w != null ? w : client.getWidget(
+                    ComponentID.CHATBOX_INPUT));
             if (chatboxWidget == null) {
                 return;
             }

@@ -11,7 +11,7 @@ A RuneLite plugin for clearing unsent messages from your chatbox
 
 ## Settings
 
-<img width="240" alt="Picture of the settings panel" src="https://github.com/user-attachments/assets/2b5c5117-c76f-4043-bff0-11b468e27cb8"/>
+<img width="240" alt="Picture of the settings panel" src="https://github.com/user-attachments/assets/e36706a7-d5c7-4549-92ba-27abb0e75cb6"/>
 
 ### Time-based
 
@@ -27,6 +27,7 @@ _Default: disabled_
 
 ## Changelog
 
+* 2025-02-10: Fix compatibility with latest game update. No longer use hardcoded widget IDs.
 * 2024-11-13: Add instant clear hotkey. Refactor to ignore non-character keys (e.g. arrows).
 * 2024-10-08: Fix compatibility with latest RuneLite version.
 * 2023-09-06: Performance optimizations (do less on client thread).

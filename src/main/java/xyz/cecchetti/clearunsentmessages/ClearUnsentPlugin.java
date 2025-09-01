@@ -3,9 +3,7 @@ package xyz.cecchetti.clearunsentmessages;
 import com.google.inject.Inject;
 import com.google.inject.Provides;
 import lombok.extern.slf4j.Slf4j;
-import net.runelite.api.events.WidgetClosed;
 import net.runelite.client.config.ConfigManager;
-import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.input.KeyManager;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
@@ -41,13 +39,6 @@ public class ClearUnsentPlugin extends Plugin {
 	protected void shutDown() throws Exception {
 		keyManager.unregisterKeyListener(timeBasedKeyListener);
 		keyManager.unregisterKeyListener(hotkeyListener);
-	}
-
-	@Subscribe
-	public void onWidgetClosed(WidgetClosed widgetClosed) {
-		if (widgetClosed.getGroupId() == 162) {
-			chatMessageManager.releaseChatboxWidget();
-		}
 	}
 
 }

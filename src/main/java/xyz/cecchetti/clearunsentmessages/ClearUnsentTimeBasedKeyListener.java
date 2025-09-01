@@ -4,7 +4,7 @@ import com.google.common.collect.Sets;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
-import net.runelite.api.VarClientStr;
+import net.runelite.api.gameval.VarClientID;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.input.KeyListener;
 
@@ -58,7 +58,7 @@ public class ClearUnsentTimeBasedKeyListener implements KeyListener {
 
     private void maybeClearMessage() {
         clientThread.invokeLater(() -> {
-            final String typedText = client.getVarcStrValue(VarClientStr.CHATBOX_TYPED_TEXT);
+            final String typedText = client.getVarcStrValue(VarClientID.CHATINPUT);
             if (!shouldClearMessage(typedText)) {
                 log.debug("No update needed: [{}]", typedText);
                 return;

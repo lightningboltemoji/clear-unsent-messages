@@ -27,6 +27,7 @@ _Default: disabled_
 
 ## Changelog
 
+* 2025-09-01: Send backspace after clearing (for Key Remapping plugin compatibility) only when chatbox is focused.
 * 2025-02-10: Fix compatibility with latest game update. No longer use hardcoded widget IDs.
 * 2024-11-13: Add instant clear hotkey. Refactor to ignore non-character keys (e.g. arrows).
 * 2024-10-08: Fix compatibility with latest RuneLite version.
